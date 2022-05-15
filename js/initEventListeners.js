@@ -15,18 +15,17 @@ const counterUpdate = (array) => {
 
 
 const taskToUpdate = (element, importantState, doneState, gateway) => {
-    const elementId = element.id;
     const task = {
         text: element.text,
         important: importantState ? !element.important : element.important,
         done: doneState ? !element.done : element.done,
         createDate: element.createDate,
-        finishDate: element.done ?
-            new Date().toISOString()
+        finishDate: !element.done ?
+            new Date().toLocaleString()
             :
             null
     }
-    return gateway ? updateTask(elementId, task) : [elementId, task];
+    return gateway ? updateTask(element.id, task) : [ element.id, task ];
 }
 
 
@@ -34,6 +33,7 @@ export const addEventListeners = (array) => array.forEach(item => {
 
     item.addEventListener('click', event => {
         const targetIndex = +item.dataset.index;
+        const targetTask = getNewTasksArray().find(element => +element.id === targetIndex ? element : '');
 
         if (event.target.classList.contains('delete')) {
 
@@ -47,20 +47,21 @@ export const addEventListeners = (array) => array.forEach(item => {
 
         } else if (event.target.classList.contains('important')) {
             item.classList.toggle('important');
-            taskItem.important = !taskItem.important;
-            setItem(tasksArray);
-            taskToUpdate(taskItem, true, false, true);
+            tasksArray[targetIndex].important = !tasksArray[targetIndex].important;
+            setItem(getNewTasksArray());
+            taskToUpdate(targetTask, true, false);
 
         } else {
-            item.classList.toggle('done');
-            const targetTask = getNewTasksArray().find(element => +element.id === targetIndex ? element : '');
+            taskToUpdate(targetTask, false, true, true);
             const [elementId, task] = taskToUpdate(targetTask, false, true, false);
             updateTask(elementId, task)
                 .then(getTasksList)
                 .then(newTasksList => {
                     setItem(newTasksList);
-                    ifFilteredRender(getNewTasksArray(), true);
-                    filteredCheck ? addEventListeners(document.querySelectorAll('.todo-list__item')) : '';
+                    // renderWithListeners(getNewTasksArray());
+                    ifFilteredRender(newTasksList);
+                    addEventListeners(document.querySelectorAll('.todo-list__item'));
+                    // filteredCheck ? addEventListeners(document.querySelectorAll('.todo-list__item')) : '';
                 })
         }
         counterUpdate(getNewTasksArray());

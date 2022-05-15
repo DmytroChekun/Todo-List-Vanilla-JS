@@ -15,9 +15,14 @@ export const renderListItem = (text, isImportant, isDone, id, createDate, finish
         <div class="todo-list__item-content">
             <span class="todo-list__item-label">${text}</span>
             <span class="todo-list__dates">
-                <span class="todo-list__create-date">${createDate}</span>
-                
-                <span class="todo-list__finish-date">${finishDate ? finishDate : ''}</span>
+                <span class="todo-list__create-date">
+                    <img src="img/add-ico.svg">
+                    ${createDate}
+                </span>
+                ${finishDate ? `<span class="todo-list__finish-date">
+                    <img src="img/done-ico.svg">
+                    ${finishDate}
+                </span>`: ''}
             </span>
             <span class="todo-list__item-btns">
                 <button class="todo-list__item-btn delete">

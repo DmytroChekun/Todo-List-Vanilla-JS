@@ -332,3 +332,24 @@ body {
   .delete {
     
   }
+
+  .todo-list__dates {
+    width: 140px;
+  }
+
+
+
+  .todo-list__create-date, .todo-list__finish-date {
+    font-size: 8px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .todo-list__create-date img {
+    width: 14px;
+  }
+
+  .todo-list__finish-date img {
+    width: 14px;
+  }
