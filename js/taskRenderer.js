@@ -1,5 +1,5 @@
-export const renderListItem = (text, isImportant, isDone, id) => {
-    
+export const renderListItem = (text, isImportant, isDone, id, createDate, finishDate) => {
+
     const liElement = document.createElement('li');
 
     liElement.classList.add('todo-list__item');
@@ -14,6 +14,11 @@ export const renderListItem = (text, isImportant, isDone, id) => {
     liElement.innerHTML = `
         <div class="todo-list__item-content">
             <span class="todo-list__item-label">${text}</span>
+            <span class="todo-list__dates">
+                <span class="todo-list__create-date">${createDate}</span>
+                
+                <span class="todo-list__finish-date">${finishDate ? finishDate : ''}</span>
+            </span>
             <span class="todo-list__item-btns">
                 <button class="todo-list__item-btn delete">
                     <img src="img/trash-can.svg" alt="">

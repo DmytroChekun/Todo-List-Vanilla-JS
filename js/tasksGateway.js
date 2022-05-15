@@ -1,6 +1,6 @@
 const baseUrl = 'https://6274f9b95dc4f5764b9c52e4.mockapi.io/todo/tasks/';
 
-export const createTask = taskData => 
+export const createTask = taskData =>
     fetch(baseUrl, {
         method: 'POST',
         headers: {
@@ -25,8 +25,8 @@ export const deleteTask = (taskId) =>
 
 export const initTasksList = () =>
     fetch(baseUrl)
-        .then( response => response );
+        .then(response => response);
 
 export const getTasksList = () =>
     fetch(baseUrl)
-        .then( response => response.json() );
+        .then(response => response.json());

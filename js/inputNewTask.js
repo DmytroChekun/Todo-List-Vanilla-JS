@@ -5,10 +5,10 @@ import { renderList } from "./listRenderer.js";
 import { ifFilteredRender } from "./ifFilteredRender.js";
 import { addEventListeners } from "./initEventListeners.js";
 
+
+
 const textInput = document.querySelector('.add-item-input');
 const confirmButton = document.querySelector('.add-item-btn');
-
-
 
 
 const biggestIdValue = () => {
@@ -26,8 +26,8 @@ const biggestIdValue = () => {
 }
 
 
-export const inputNewTask = ()=> {
-    
+export const inputNewTask = () => {
+
     let textValue = '';
 
     const addNewTask = () => {
@@ -37,31 +37,24 @@ export const inputNewTask = ()=> {
                 text: textValue,
                 important: false,
                 done: false,
-                createDate: new Date().toISOString(),
-                finishDate: undefined,
+                createDate: new Date().toLocaleString(),
+                finishDate: null,
                 id: biggestIdValue()
             }
-            // createTask(newItem)
-            // .then(
-            //     initTasksList
-            //         .then(response => setItem(response.json()))
-            //         .then(renderList(getNewTasksArray()))
-            //         .then(addEventListeners(document.querySelectorAll('.todo-list__item')))
-            // )
             createTask(newTask)
-            .then(getTasksList)
-            .then(newTasksList => {
-                setItem(newTasksList);
-                ifFilteredRender(newTasksList);
-                addEventListeners(document.querySelectorAll('.todo-list__item'));
-            })
+                .then(getTasksList)
+                .then(newTasksList => {
+                    setItem(newTasksList);
+                    ifFilteredRender(newTasksList);
+                    addEventListeners(document.querySelectorAll('.todo-list__item'));
+                })
         }
     }
 
     textInput.addEventListener('change', () => {
         if (textInput.value) {
             textValue = textInput.value;
-            confirmButton.addEventListener('click', ()=> {
+            confirmButton.addEventListener('click', () => {
                 addNewTask();
             })
         }
@@ -75,5 +68,5 @@ export const inputNewTask = ()=> {
             }
         }
     });
-    
+
 }

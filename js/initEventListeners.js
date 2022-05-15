@@ -26,12 +26,12 @@ const taskToUpdate = (element, importantState, doneState, gateway) => {
             :
             null
     }
-    return gateway ? updateTask(elementId, task) : [ elementId, task ];
+    return gateway ? updateTask(elementId, task) : [elementId, task];
 }
 
 
 export const addEventListeners = (array) => array.forEach(item => {
-    
+
     item.addEventListener('click', event => {
         const targetIndex = +item.dataset.index;
 
@@ -40,38 +40,29 @@ export const addEventListeners = (array) => array.forEach(item => {
             deleteTask(+targetIndex)
                 .then(getTasksList)
                 .then(newTasksList => {
-                        setItem(newTasksList);
-                        ifFilteredRender(getNewTasksArray(), false);
-                        addEventListeners(document.querySelectorAll('.todo-list__item'));
-                    }
-                )
-            
-        } else if (event.target.classList.contains('important')) {
+                    setItem(newTasksList);
+                    ifFilteredRender(getNewTasksArray(), false);
+                    addEventListeners(document.querySelectorAll('.todo-list__item'));
+                })
 
-            tasksArray.forEach( (taskItem) => {
-                if (+taskItem.id === +targetIndex) {
-                    item.classList.toggle('important');
-                    taskItem.important = !taskItem.important;
-                    setItem(tasksArray);
-                    taskToUpdate(taskItem, true, false, true);
-                }
-            })
+        } else if (event.target.classList.contains('important')) {
+            item.classList.toggle('important');
+            taskItem.important = !taskItem.important;
+            setItem(tasksArray);
+            taskToUpdate(taskItem, true, false, true);
 
         } else {
             item.classList.toggle('done');
-            console.log('clck');
             const targetTask = getNewTasksArray().find(element => +element.id === targetIndex ? element : '');
-            
             const [elementId, task] = taskToUpdate(targetTask, false, true, false);
             updateTask(elementId, task)
                 .then(getTasksList)
                 .then(newTasksList => {
-                    console.log(newTasksList);
                     setItem(newTasksList);
                     ifFilteredRender(getNewTasksArray(), true);
                     filteredCheck ? addEventListeners(document.querySelectorAll('.todo-list__item')) : '';
                 })
-        } 
+        }
         counterUpdate(getNewTasksArray());
     })
 }, counterUpdate(getNewTasksArray()));
