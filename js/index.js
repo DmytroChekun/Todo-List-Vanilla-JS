@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTasksList()
         .then(response => response.ok ? response.json() : '[]')
         .then(response => setItem(response))
-        .then((response) => {
-            tasksArray !== '[]' ? renderWithListeners(response) : '';
+        .then(() => {
+            tasksArray !== '[]' ? renderWithListeners(getNewTasksArray()) : '';
             inputNewTask();
             filterFunc();
             searchTask();
