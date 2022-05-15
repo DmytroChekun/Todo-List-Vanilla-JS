@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="todo-header">
+
+            <div class="todo-header__top-section">
+                <h1 class="todo-header__title">Todo list</h1>
+                <h2 class="todo-header__todo-info">
+                    <span class="todo-count">0</span> more to do, <span class="done-count">0</span> done
+                </h2>
+            </div>
+
+            <div class="todo-header__bottom-section"><input class="search-panel" type="text" name="search"
+                    placeholder="Type here to search" style="font-size: 18px;">
+                <div class="filter-btns">
+                    <button class="filter-btn all active">All</button>
+                    <button class="filter-btn todo">Active</button>
+                    <button class="filter-btn done">Done</button>
+                </div>
+            </div>
+
+        </div>
+
+        <ul class="list-group todo-list">
+            
+        </ul>
+
+        <div class="add-item-form"><input class="add-item-input" type="text" placeholder="Type new task here">
+            <button class="add-item-btn">Add New Item</button>
+        </div>
+    </div>
+
+</body>
+<script src="js/index.js" type="module">
+</script>
+</html>
+
+
