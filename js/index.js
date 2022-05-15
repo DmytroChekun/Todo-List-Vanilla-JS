@@ -2,7 +2,7 @@ import { renderWithListeners } from './renderWithListeners.js';
 import { inputNewTask } from './inputNewTask.js';
 import { filterFunc } from './toggleFilter.js';
 import { searchTask } from './searchTask.js';
-import { tasksArray, setItem } from './storage.js';
+import { tasksArray, setItem, getNewTasksArray } from './storage.js';
 import { initTasksList } from './tasksGateway.js';
 
 
@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTasksList()
         .then(response => response.ok ? response.json() : '[]')
         .then(response => setItem(response))
-        .then(() => {
-            tasksArray !== '[]' ? renderWithListeners(tasksArray) : '';
+        .then((response) => {
+            tasksArray !== '[]' ? renderWithListeners(response) : '';
             inputNewTask();
             filterFunc();
             searchTask();
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const onStorageChange = () => {
-    renderWithListeners(tasksArray);
+    renderWithListeners(getNewTasksArray());
 }
 
 window.addEventListener('storage', onStorageChange);

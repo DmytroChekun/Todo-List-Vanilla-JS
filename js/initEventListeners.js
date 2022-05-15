@@ -1,4 +1,4 @@
-import { ifFilteredRender, filteredCheck } from "./ifFilteredRender.js";
+import { ifFilteredRender } from "./ifFilteredRender.js";
 import { tasksArray, setItem, getNewTasksArray } from "./storage.js";
 import { getTasksList, updateTask, deleteTask } from "./tasksGateway.js";
 
@@ -58,7 +58,6 @@ export const addEventListeners = (array) => array.forEach(item => {
                 .then(getTasksList)
                 .then(newTasksList => {
                     setItem(newTasksList);
-                    // renderWithListeners(getNewTasksArray());
                     ifFilteredRender(newTasksList);
                     addEventListeners(document.querySelectorAll('.todo-list__item'));
                     // filteredCheck ? addEventListeners(document.querySelectorAll('.todo-list__item')) : '';
