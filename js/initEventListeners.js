@@ -46,21 +46,24 @@ export const addEventListeners = (array) => array.forEach(item => {
                 })
 
         } else if (event.target.classList.contains('important')) {
-            item.classList.toggle('important');
-            tasksArray[targetIndex].important = !tasksArray[targetIndex].important;
-            setItem(getNewTasksArray());
-            taskToUpdate(targetTask, true, false);
-
-        } else {
-            taskToUpdate(targetTask, false, true, true);
-            const [elementId, task] = taskToUpdate(targetTask, false, true, false);
+            const [elementId, task] = taskToUpdate(targetTask, true);
             updateTask(elementId, task)
                 .then(getTasksList)
                 .then(newTasksList => {
                     setItem(newTasksList);
                     ifFilteredRender(newTasksList);
                     addEventListeners(document.querySelectorAll('.todo-list__item'));
-                    // filteredCheck ? addEventListeners(document.querySelectorAll('.todo-list__item')) : '';
+            })
+            
+        } else {
+            taskToUpdate(targetTask, false, true, true);
+            const [elementId, task] = taskToUpdate(targetTask, false, true);
+            updateTask(elementId, task)
+                .then(getTasksList)
+                .then(newTasksList => {
+                    setItem(newTasksList);
+                    ifFilteredRender(newTasksList);
+                    addEventListeners(document.querySelectorAll('.todo-list__item'));
                 })
         }
         counterUpdate(getNewTasksArray());

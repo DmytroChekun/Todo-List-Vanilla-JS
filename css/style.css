@@ -206,6 +206,7 @@ body {
     align-items: center;
     justify-content: space-between;
   }
+
   .todo-list__item.important .todo-list__item-content .todo-list__item-label {
     color: #004e00;
     font-weight: 600;
@@ -261,7 +262,6 @@ body {
 
   .todo-list {
     margin-top: 20px;
-    background: rgba(255, 255, 255, 0.5);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(2.5px);
     -webkit-backdrop-filter: blur(2.5px);
@@ -271,9 +271,32 @@ body {
     padding: 0.6rem 1rem;
     font-weight: 500;
     cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    backface-visibility: hidden;
+    transition: .3s;
   }
+  .todo-list__item.done {
+    background: rgba(234, 234, 234, 0.5);
+  }
+  .todo-list__item.important {
+    background: rgba(255, 234, 234, 0.5);
+    transition: background .5s;
+  }
+
+  .todo-list__item:first-child {
+    border-radius: 10px 10px 0 0;
+  }
+  .todo-list__item:last-child {
+    border-radius: 0 0 10px 10px;
+  }
+
   .todo-list__item:not(:last-child) {
     border-bottom: 1px solid #8b8b8b;
+  }
+
+  .todo-list__item:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transition: .2s;
   }
 
 
@@ -345,6 +368,11 @@ body {
     display: flex;
     align-items: center;
   }
+  
+  .todo-list__finish-date {
+    margin-top: 2px;
+  }
+
 
   .todo-list__create-date img {
     width: 14px;
